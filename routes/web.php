@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
 
 
@@ -32,4 +33,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
 
 Route::get('/client/dashboard', [ClientController::class, 'dashboard']);
+
+Route::get('/admin/categories', [CategoryController::class, 'index']);
+
 

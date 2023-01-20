@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dashboard Admin</title>
+    <title>Page Catégories</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
@@ -152,7 +152,8 @@
             <div class="pb-5">
               <div class="row g-5">
               <div>
-                Hello Administrateur
+                <!--Pour Appeler le Modal d'Ajout-->
+                <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">Ajouter Une Catégorie</a>
               </div>
               </div>
             </div>
@@ -170,6 +171,39 @@
           </div>
         </div>
       </main>
+
+      <!--Modal d'ajout-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ajouter Une Catégorie</h5><button class="btn p-1" type="button" data-bs-dismiss="modal" aria-label="Close"><span class="fas fa-times fs--1"></span></button>
+        </div>
+
+        <!--Form Avant modal-body et après les boutons de modal-footer-->
+        <form action="">
+        <div class="modal-body">
+
+                <div class="mb-3">
+                    <label class="form-label" for="exampleFormControlInput1">Nom Catégorie</label>
+                    <input class="form-control" id="exampleFormControlInput1" type="text" placeholder="Taper le nom de la catégorie">
+                  </div>
+                  <div class="mb-0">
+                    <label class="form-label" for="exampleTextarea">Description Catégorie</label>
+                    <textarea class="form-control" rows="3"> </textarea>
+                  </div>
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="submit">Okay</button>
+            <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">Cancel</button>
+        </div>
+
+    </form>
+
+        </div>
+    </div>
+    </div>
 
     <script src="{{ asset('dashassets/js/phoenix.js') }}"></script>
     <script src="{{ asset('dashassets/js/ecommerce-dashboard.js') }}"></script>
