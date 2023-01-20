@@ -36,4 +36,7 @@ Route::get('/client/dashboard', [ClientController::class, 'dashboard']);
 
 Route::get('/admin/categories', [CategoryController::class, 'index']);
 
+Route::post('/admin/categories/store', [CategoryController::class, 'store']);
+
+
 

@@ -152,8 +152,41 @@
             <div class="pb-5">
               <div class="row g-5">
               <div>
+                <h1 >Liste Des Catégories</h1>
+                <hr/>
                 <!--Pour Appeler le Modal d'Ajout-->
-                <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">Ajouter Une Catégorie</a>
+                <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary mt-3">Ajouter Une Catégorie</a>
+              </div>
+              
+              <div class="mt-3">
+
+                <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">N°</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                        <!--$index=counter, $c = $categories-->
+                      @foreach ($categories as $index => $c)
+                        <tr>
+                            <th scope="row">{{ $index + 1 }}</th>
+                            <td>{{ $c->name }}</td>
+                            <td>{{ $c->description }}</td>
+                            <td>
+                                <a href="" class="btn btn-success">Modifier</a>
+                                <a href="" class="btn btn-danger">Supprimer</a>
+                            </td>
+                       </tr>
+                      @endforeach  
+             
+                    </tbody>
+                  </table>
+                  
               </div>
               </div>
             </div>
@@ -181,18 +214,28 @@
         </div>
 
         <!--Form Avant modal-body et après les boutons de modal-footer-->
-        <form action="">
+        <form action="/admin/categories/store" method="POST">
+            <!--pour sécuriser le formulaire et pour eviter erreur 419-->
+            @csrf 
         <div class="modal-body">
-
                 <div class="mb-3">
                     <label class="form-label" for="exampleFormControlInput1">Nom Catégorie</label>
-                    <input class="form-control" id="exampleFormControlInput1" type="text" placeholder="Taper le nom de la catégorie">
-                  </div>
+                    <input class="form-control" name="name" id="exampleFormControlInput1" type="text" placeholder="Taper le nom de la catégorie">
+                    @error('name')
+                        <div class="alert alert-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
                   <div class="mb-0">
                     <label class="form-label" for="exampleTextarea">Description Catégorie</label>
-                    <textarea class="form-control" rows="3"> </textarea>
+                    <textarea class="form-control" name="description" rows="3"> </textarea>
+                    @error('description')
+                        <div class="alert alert-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
                   </div>
-
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" type="submit">Okay</button>
