@@ -34,9 +34,17 @@ Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
 
 Route::get('/client/dashboard', [ClientController::class, 'dashboard']);
 
+//Affichage de la liste des catégories
 Route::get('/admin/categories', [CategoryController::class, 'index']);
 
+//Ajouter une catégorie
 Route::post('/admin/categories/store', [CategoryController::class, 'store']);
+
+//Modifier une catégorie
+Route::post('/admin/categories/update', [CategoryController::class, 'update']);
+
+//Supprimer une catégorie
+Route::get('/admin/categories/{id}/delete', [CategoryController::class, 'destroy']);
 
 
 
