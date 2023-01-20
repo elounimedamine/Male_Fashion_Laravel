@@ -255,10 +255,18 @@
                                                     another account</a></li>
                                         </ul>
                                         <hr>
-                                        <div class="px-3"><a
-                                                class="btn btn-phoenix-secondary d-flex flex-center w-100"
-                                                href="#!"><span class="me-2"
-                                                    data-feather="log-out"></span>Sign out</a></div>
+                                        <!--SignOut-->
+                                        <div class="px-3">
+                                            <a onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();"
+                                                    class="btn btn-phoenix-secondary d-flex flex-center w-100"
+                                                    href="#!"><span class="me-2"
+                                                        data-feather="log-out"></span>Sign out</a>
+
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                @csrf
+                                            </form>
+                                        </div>
                                         <div class="my-2 text-center fw-bold fs--2 text-600"><a class="text-600 me-1"
                                                 href="#!">Privacy policy</a>&bull;<a class="text-600 mx-1"
                                                 href="#!">Terms</a>&bull;<a class="text-600 ms-1"
