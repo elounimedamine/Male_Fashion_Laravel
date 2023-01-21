@@ -30,21 +30,23 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
-
+//Dashboard Client
 Route::get('/client/dashboard', [ClientController::class, 'dashboard']);
 
+//Dashboard Admin
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->middleware('auth', 'admin');
+
 //Affichage de la liste des catégories
-Route::get('/admin/categories', [CategoryController::class, 'index']);
+Route::get('/admin/categories', [CategoryController::class, 'index'])->middleware('auth', 'admin');
 
 //Ajouter une catégorie
-Route::post('/admin/categories/store', [CategoryController::class, 'store']);
+Route::post('/admin/categories/store', [CategoryController::class, 'store'])->middleware('auth', 'admin');
 
 //Modifier une catégorie
-Route::post('/admin/categories/update', [CategoryController::class, 'update']);
+Route::post('/admin/categories/update', [CategoryController::class, 'update'])->middleware('auth', 'admin');
 
 //Supprimer une catégorie
-Route::get('/admin/categories/{id}/delete', [CategoryController::class, 'destroy']);
+Route::get('/admin/categories/{id}/delete', [CategoryController::class, 'destroy'])->middleware('auth', 'admin');
 
 
 
