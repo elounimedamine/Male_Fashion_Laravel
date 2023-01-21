@@ -7,13 +7,13 @@
                                     data-feather="cast"></span></span><span
                                 class="nav-link-text">Catégories</span></div>
                     </a></li>
-                <li class="nav-item"><a class="nav-link active" href="index.html">
+                <li class="nav-item"><a class="nav-link active" href="/admin/products">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span
                                     data-feather="cast"></span></span><span
                                 class="nav-link-text">Produits</span></div>
                     </a></li>
 
-                    <li class="nav-item"><a class="nav-link active" href="index.html">
+                    <li class="nav-item"><a class="nav-link active" href="/admin/clients">
                         <div class="d-flex align-items-center"><span class="nav-link-icon"><span
                                     data-feather="cast"></span></span><span
                                 class="nav-link-text">Clients</span></div>

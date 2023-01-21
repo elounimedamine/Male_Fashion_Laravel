@@ -26,6 +26,7 @@ class CategoryController extends Controller
         ]);
 
         $category = new Category();
+
         $category->name = $request->name;
         $category->description = $request->description;
 
@@ -75,7 +76,7 @@ class CategoryController extends Controller
             return redirect()->back();
             // return redirect()->back()->withErrors($request)->withInput();
         }else{
-            echo "Erreur de modifier de la catégorie";
+            echo "Erreur de modification de la catégorie";
         }
 
     }
