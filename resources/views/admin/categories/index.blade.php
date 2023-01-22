@@ -116,7 +116,7 @@
                         </div>
                         <div class="mb-0">
                             <label class="form-label" for="exampleTextarea">Description Catégorie</label>
-                            <textarea class="form-control" name="description" rows="3"> </textarea>
+                            <textarea class="form-control" name="description" rows="3"></textarea>
                             @error('description')
                                 <div class="alert alert-danger">
                                     {{ $message }}
@@ -168,7 +168,7 @@
                             </div>
                             <div class="mb-0">
                                 <label class="form-label" for="exampleTextarea">Description Catégorie</label>
-                                <textarea class="form-control" name="description" rows="3"> {{ $c->description }} </textarea>
+                                <textarea class="form-control" name="description" rows="3">{{ $c->description }}</textarea>
                                 @error('description')
                                     <div class="alert alert-danger">
                                         {{ $message }}

@@ -64,8 +64,8 @@
                                             <th scope="row">{{ $index + 1 }}</th>
                                             <td>{{ $p->name }}</td>
                                             <td>{{ $p->description }}</td>
-                                            <td>{{ $p->price }}</td>
-                                            <td>{{ $p->qte }}</td>
+                                            <td>{{ $p->price }} DT</td>
+                                            <td>{{ $p->qte }} pièces</td>
                                             <td>
                                                 <!--public/uploads/nomphoto-->
                                                 <img src="{{ asset('uploads') }}/{{ $p->photo }}" width="100" alt="">
@@ -115,6 +115,20 @@
                     <!--pour sécuriser le formulaire et pour eviter erreur 419-->
                     @csrf
                     <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label" for="exampleFormControlInput1">Catégorie Produit</label>
+                            <select name="categorie" class="form-control">
+                                @foreach ($categories as $c)
+                                    <!--id et nom de catégorie-->
+                                    <option value="{{ $c->id }}"> {{ $c->name }} </option>
+                                @endforeach
+                            </select>
+                            @error('categorie')
+                                <div class="alert alert-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
                         <div class="mb-3">
                             <label class="form-label" for="exampleFormControlInput1">Nom Produit</label>
                             <input class="form-control" name="name" id="exampleFormControlInput1" type="text"
@@ -210,6 +224,21 @@
                             <div class="text-center">
                                 <!--pour récupérer l'image à modifier-->
                                 <img src="{{ asset('uploads') }}/{{ $p->photo }}" width="100" alt="">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="exampleFormControlInput1">Catégorie Produit</label>
+                                <select name="categorie" class="form-control">
+                                    @foreach ($categories as $c)
+                                        <!--id et nom de catégorie-->
+                                        <option value="{{ $c->id }}"> {{ $c->name }} </option>
+                                    @endforeach
+                                </select>
+                                @error('categorie')
+                                    <div class="alert alert-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
 
                             <div class="mb-3">

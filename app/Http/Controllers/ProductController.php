@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -9,10 +10,11 @@ class ProductController extends Controller
 {
     //
     //pour recupérer tous les données et les afficher dans un tableau
-    //index() => fonction qui permet d'afficher la liste des produits
+    //index() => fonction qui permet d'afficher la liste des produits et catégories
     public function index(){
         $products = Product::all();
-        return view('admin.produits.index')->with('products', $products);
+        $categories = Category::all();
+        return view('admin.produits.index')->with('categories', $categories)->with('products', $products);
     }
 
     //store(Request $request) => fonction qui permet d'ajouter une catégorie
@@ -31,6 +33,10 @@ class ProductController extends Controller
         $product = new Product();
 
         $product->name = $request->name;
+
+        //foreign key ml base = ml formulaire
+        $product->category_id = $request->categorie;
+
         $product->description = $request->description;
         $product->price = $request->price;
         $product->qte = $request->qte;
@@ -96,6 +102,10 @@ class ProductController extends Controller
 
         //ajouter des nouveaux informations
         $product->name = $request->name;
+
+        //foreign key ml base = ml formulaire
+        $product->category_id = $request->categorie;
+
         $product->description = $request->description;
         $product->price = $request->price;
         $product->qte = $request->qte;
