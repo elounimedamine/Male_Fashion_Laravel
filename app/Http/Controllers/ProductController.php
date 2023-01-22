@@ -28,9 +28,34 @@ class ProductController extends Controller
             'photo' => 'required',
         ]);
 
-       // dd($request);
+        //photo du formulaire
+        //pour afficher la liste des informations du photo
+        //dd($request, $request->file('photo'));
 
-        $product = new Product();
+        //pour afficher les informations telque le path du photo
+        $image = $request->file('photo'); 
+        //echo $image; //C:\Users\medam\AppData\Local\Temp\php3BB2.tmp
+
+        //pour afficher l'extension de l'image
+        $image_extension = $image->getClientOriginalExtension();
+        //echo $image_extension; //png
+
+        //pour afficher le nom de l'image
+        $image_name = $image->getClientOriginalName();
+        //echo $image_name; //456212.png
+ 
+        //pour afficher la taille de l'image en octets
+        $image_size = $image->getSize();
+        //echo $image_size; //9600 octets
+
+        //Upload de l'image
+        //Création de dossier nommée uploads dans lequel contient les images uploadée
+        $destinationPath = 'uploads';
+        //diriger l'image vers le dossier uploads
+        $image_move = $image->move($destinationPath, $image_name); 
+        //echo $image_move; //uploads\456212.png
+
+        /*$product = new Product();
 
         $product->name = $request->name;
         $product->description = $request->description;
@@ -44,7 +69,7 @@ class ProductController extends Controller
             // return redirect()->back()->withErrors($request)->withInput();
         }else{
             echo "Erreur d'ajout de produit";
-        }
+        }*/
 
     }
 

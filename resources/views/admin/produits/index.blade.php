@@ -115,7 +115,8 @@
                 </div>
 
                 <!--Form Avant modal-body et après les boutons de modal-footer-->
-                <form action="/admin/products/store" method="POST">
+                <!--enctype="multipart/form-data" pour uploader une photo-->
+                <form action="/admin/products/store" method="POST" enctype="multipart/form-data">
                     <!--pour sécuriser le formulaire et pour eviter erreur 419-->
                     @csrf
                     <div class="modal-body">
