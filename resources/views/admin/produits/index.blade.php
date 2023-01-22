@@ -198,10 +198,20 @@
                     </div>
 
                     <!--Form Avant modal-body et après les boutons de modal-footer-->
-                    <form action="/admin/products/update" method="POST">
+                    <form action="/admin/products/update" method="POST" enctype="multipart/form-data">
                         <!--pour sécuriser le formulaire et pour eviter erreur 419-->
                         @csrf
                         <div class="modal-body">
+
+                            <!--pour les appeler dans la fonction update par l'id-->            
+                            <input type="hidden" name="id_product" value="{{ $p->id }}">
+
+
+                            <div class="text-center">
+                                <!--pour récupérer l'image à modifier-->
+                                <img src="{{ asset('uploads') }}/{{ $p->photo }}" width="100" alt="">
+                            </div>
+
                             <div class="mb-3">
                                 <label class="form-label" for="exampleFormControlInput1">Nom Produit</label>
                                 <input class="form-control" name="name" value="{{ $p->name }}"
@@ -251,8 +261,8 @@
 
                             <div class="mb-3">
                                 <label class="form-label" for="exampleFormControlInput1">Photo Produit</label>
-                                <input class="form-control" name="photo" value="{{ $p->photo }}"
-                                    id="exampleFormControlInput1" type="text"
+                                <!--Photo sans value-->
+                                <input class="form-control" name="photo" id="exampleFormControlInput1" type="file"
                                     placeholder="Choisissez la photo de produit">
                                 @error('photo')
                                     <div class="alert alert-danger">
@@ -263,12 +273,10 @@
 
                             <!---->
 
-                            <!--pour les appeler dans la fonction update par l'id-->
-                            <input type="hidden" name="id_product" value="{{ $p->id }}">
 
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-primary" type="submit">Okay</button>
+                            <button class="btn btn-primary" type="submit">Edit</button>
                             <button class="btn btn-outline-primary" type="button"
                                 data-bs-dismiss="modal">Cancel</button>
                         </div>

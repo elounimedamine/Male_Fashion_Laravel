@@ -85,8 +85,93 @@ class ProductController extends Controller
 
     }
 
+    //update() => permet de modifier le produit
+    public function update(Request $request){
+
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'qte' => 'required',
+            'photo' => 'required',
+        ]);
+
+        //récupérer l'id du formulaire
+        $id = $request->id_product;
+
+        //chercher le produit selon leur id
+        $product = Product::find($id);
+
+        // vérifier s'il y a une photo
+        if($request->file('photo')){
+            //s'il y a une ancienne photo, on va supprimer cette ancienne photo
+
+            //public_path utilisée pour prendre le chemin du dossier public 
+            //$file_path = Public//uploads/nom_image 
+            $file_path = public_path() . '/uploads/' . $product->photo; 
+
+            //dd($file_path); //=> "C:\laragon\www\malefashion\public/uploads/63cc946344bf7.png"
+
+            //unlink() => permet de supprimer un fichier par l'attribution du chemain de localisation de la photo située dans la variable $file_path et les supprimer de la racine tq word, pdf etc
+            //unlink(): http does not allow unlinking
+            //il faut accéder au document sans http
+            unlink($file_path);
+
+        }else{
+            //ajouter des nouveaux informations
+            $product->name = $request->name;
+            $product->description = $request->description;
+            $product->price = $request->price;
+            $product->qte = $request->qte;
+
+            //Ajout de nouvelle photo
+
+            //photo du formulaire
+            //pour afficher la liste des informations du photo
+            //dd($request, $request->file('photo'));
+
+            //pour récupérer afficher les informations telque le path du photo
+            $image = $request->file('photo'); 
+            //echo $image; //C:\Users\medam\AppData\Local\Temp\php3BB2.tmp
+
+            //pour afficher l'extension de l'image
+            $image_extension = $image->getClientOriginalExtension();
+            //echo $image_extension; //png
+
+            //Upload de l'image
+            // uniqid() => permet de définir un id aléatoire pour l'image : exp => 4567kji
+            $newname = uniqid(); 
+
+            //concaténer newname avec l'extension de l'image : exp => 4567kji.png
+            $newname .= "." . $image_extension; 
+            //echo $newname;
+
+            //Création de dossier nommée uploads dans lequel contient les images uploadée
+            $destinationPath = 'uploads';
+
+            //diriger l'image avec son nouvea nom générée $newname vers le dossier uploads définit dans la variable $destinationPath 
+            //$image_move = $image->move($destinationPath, $image_name); 
+            $image_move = $image->move($destinationPath, $newname); 
+            //echo $image_move; //uploads\456212.png
+
+            // elle prend le nouveau nom $newname
+            $product->photo = $newname;
+
+        }
+
+        if($product->update()){
+            //redirection vers la page elle meme
+            return redirect()->back();
+            // return redirect()->back()->withErrors($request)->withInput();
+        }else{
+            echo "Erreur de modification de produit";
+        }
+
+    }
+
     //destroy($id) => supprimer un produit selon leur id
     public function destroy($id){
+        
         $product = Product::find($id);
 
         //public_path utilisée pour prendre le chemin du dossier public 
@@ -109,40 +194,5 @@ class ProductController extends Controller
         }
     }
 
-    //update() => permet de modifier le produit
-    public function update(Request $request){
-
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'price' => 'required',
-            'qte' => 'required',
-            'photo' => 'required',
-        ]);
-
-        //récupérer l'id du formulaire
-        $id = $request->id_product;
-
-        //chercher le produit selon leur id
-        $product = Product::find($id);
-
-        //ajouter des nouveaux informations
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->price = $request->price;
-        $product->qte = $request->qte;
-        $product->photo = $request->photo;
-
-        if($product->update()){
-            //redirection vers la page elle meme
-            return redirect()->back();
-            // return redirect()->back()->withErrors($request)->withInput();
-        }else{
-            echo "Erreur de modification de produit";
-        }
-
-    }
-
-    
 
 }
