@@ -88,14 +88,6 @@ class ProductController extends Controller
     //update() => permet de modifier le produit
     public function update(Request $request){
 
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'price' => 'required',
-            'qte' => 'required',
-            'photo' => 'required',
-        ]);
-
         //récupérer l'id du formulaire
         $id = $request->id_product;
 
