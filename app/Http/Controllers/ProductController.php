@@ -102,8 +102,17 @@ class ProductController extends Controller
         //chercher le produit selon leur id
         $product = Product::find($id);
 
+        //ajouter des nouveaux informations
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->qte = $request->qte;
+
+        //Upload Image
+
         // vérifier s'il y a une photo
         if($request->file('photo')){
+
             //s'il y a une ancienne photo, on va supprimer cette ancienne photo
 
             //public_path utilisée pour prendre le chemin du dossier public 
@@ -116,13 +125,6 @@ class ProductController extends Controller
             //unlink(): http does not allow unlinking
             //il faut accéder au document sans http
             unlink($file_path);
-
-        }else{
-            //ajouter des nouveaux informations
-            $product->name = $request->name;
-            $product->description = $request->description;
-            $product->price = $request->price;
-            $product->qte = $request->qte;
 
             //Ajout de nouvelle photo
 
@@ -171,7 +173,7 @@ class ProductController extends Controller
 
     //destroy($id) => supprimer un produit selon leur id
     public function destroy($id){
-        
+
         $product = Product::find($id);
 
         //public_path utilisée pour prendre le chemin du dossier public 
