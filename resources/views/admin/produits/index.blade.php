@@ -66,7 +66,10 @@
                                             <td>{{ $p->description }}</td>
                                             <td>{{ $p->price }}</td>
                                             <td>{{ $p->qte }}</td>
-                                            <td>{{ $p->photo }}</td>
+                                            <td>
+                                                <!--public/uploads/nomphoto-->
+                                                <img src="{{ asset('uploads') }}/{{ $p->photo }}" width="100" alt="">
+                                            </td>
 
                                             <td>
                                                 <!--Pour Appeler le Modal de modiciation selon l'id du modal de modification, data-bs-toggle="modal" data-bs-target="#editProduct" au lieu du href-->
@@ -87,18 +90,10 @@
                     </div>
                 </div>
 
-                <footer class="footer">
-                    <div class="row g-0 justify-content-between align-items-center h-100 mb-3">
-                        <div class="col-12 col-sm-auto text-center">
-                            <p class="mb-0 text-900">Thank you for creating with phoenix<span
-                                    class="d-none d-sm-inline-block"></span><span class="mx-1">|</span><br
-                                    class="d-sm-none">2022 &copy; <a href="https://themewagon.com">Themewagon</a></p>
-                        </div>
-                        <div class="col-12 col-sm-auto text-center">
-                            <p class="mb-0 text-600">v1.1.0</p>
-                        </div>
-                    </div>
-                </footer>
+                <!--include Footer HTML Code-->
+                @include('inc.admin.footer')
+
+
             </div>
         </div>
     </main>

@@ -28,11 +28,18 @@ class ProductController extends Controller
             'photo' => 'required',
         ]);
 
+        $product = new Product();
+
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->qte = $request->qte;
+
         //photo du formulaire
         //pour afficher la liste des informations du photo
         //dd($request, $request->file('photo'));
 
-        //pour afficher les informations telque le path du photo
+        //pour récupérer afficher les informations telque le path du photo
         $image = $request->file('photo'); 
         //echo $image; //C:\Users\medam\AppData\Local\Temp\php3BB2.tmp
 
@@ -49,19 +56,24 @@ class ProductController extends Controller
         //echo $image_size; //9600 octets
 
         //Upload de l'image
+        // uniqid() => permet de définir un id aléatoire pour l'image : exp => 4567kji
+        $newname = uniqid(); 
+
+        //concaténer newname avec l'extension de l'image : exp => 4567kji.png
+        $newname .= "." . $image_extension; 
+        //echo $newname;
+
         //Création de dossier nommée uploads dans lequel contient les images uploadée
         $destinationPath = 'uploads';
-        //diriger l'image vers le dossier uploads
-        $image_move = $image->move($destinationPath, $image_name); 
+
+        //diriger l'image avec son nouvea nom générée $newname vers le dossier uploads définit dans la variable $destinationPath 
+        //$image_move = $image->move($destinationPath, $image_name); 
+        $image_move = $image->move($destinationPath, $newname); 
         //echo $image_move; //uploads\456212.png
 
-        /*$product = new Product();
-
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->price = $request->price;
-        $product->qte = $request->qte;
-        $product->photo = $request->photo;
+        // elle prend le nouveau nom $newname
+        $product->photo = $newname;
+        
 
         if($product->save()){
             //redirection vers la page elle meme
@@ -69,13 +81,24 @@ class ProductController extends Controller
             // return redirect()->back()->withErrors($request)->withInput();
         }else{
             echo "Erreur d'ajout de produit";
-        }*/
+        }
 
     }
 
     //destroy($id) => supprimer un produit selon leur id
     public function destroy($id){
         $product = Product::find($id);
+
+        //public_path utilisée pour prendre le chemin du dossier public 
+        //$file_path = Public//uploads/nom_image 
+        $file_path = public_path() . '/uploads/' . $product->photo; 
+
+        //dd($file_path); //=> "C:\laragon\www\malefashion\public/uploads/63cc946344bf7.png"
+
+        //unlink() => permet de supprimer un fichier par l'attribution du chemain de localisation de la photo située dans la variable $file_path et les supprimer de la racine tq word, pdf etc
+        //unlink(): http does not allow unlinking
+        //il faut accéder au document sans http
+        unlink($file_path);
 
         if($product->delete()){
             //redirection vers la page elle meme
