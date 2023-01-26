@@ -30,7 +30,11 @@ use App\Http\Controllers\ProductController;
 // });
 
 //Guest Routes
+//page principale pour le guest
 Route::get('/', [GuestController::class, 'home']);
+
+//page de details produit
+Route::get('/product/details', [GuestController::class, 'productDetails']);
 
 Auth::routes();
 
