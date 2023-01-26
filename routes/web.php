@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\GuestController;
 use App\Http\Controllers\ProductController;
 
 
@@ -24,9 +25,12 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+//Guest Routes
+Route::get('/', [GuestController::class, 'home']);
 
 Auth::routes();
 
@@ -65,3 +69,6 @@ Route::post('/admin/products/update', [ProductController::class, 'update'])->mid
 
 //Supprimer une catégorie
 Route::get('/admin/products/{id}/delete', [ProductController::class, 'destroy'])->middleware('auth', 'admin');
+
+
+
