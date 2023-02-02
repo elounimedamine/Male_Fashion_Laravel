@@ -47,12 +47,24 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 //Dashboard Client
-Route::get('/client/dashboard', [ClientController::class, 'dashboard']);
+Route::get('/client/dashboard', [ClientController::class, 'dashboard'])->middleware('auth');
+
+//Pour afficher les informations du client courant qui est connecté 
+Route::get('/client/profile', [ClientController::class, 'profile'])->middleware('auth');
+
+//pour mettre à jour le profile de l'admin avec la méthode post
+Route::post('/client/profile/update', [ClientController::class, 'updateprofile'])->middleware('auth');
 
 //Route pour les catégories
 
 //Dashboard Admin
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->middleware('auth', 'admin');
+
+//Pour afficher les informations de l'admin courant qui est connecté 
+Route::get('/admin/profile', [AdminController::class, 'profile'])->middleware('auth', 'admin');
+
+//pour mettre à jour le profile de l'admin avec la méthode post
+Route::post('/admin/profile/update', [AdminController::class, 'updateprofile'])->middleware('auth', 'admin');
 
 //Affichage de la liste des catégories
 Route::get('/admin/categories', [CategoryController::class, 'index'])->middleware('auth', 'admin');
