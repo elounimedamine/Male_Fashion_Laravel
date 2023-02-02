@@ -33,8 +33,11 @@ use App\Http\Controllers\ProductController;
 //page principale pour le guest
 Route::get('/', [GuestController::class, 'home']);
 
-//page de details produit
-Route::get('/product/details', [GuestController::class, 'productDetails']);
+//page de details produit avec {id} est l'id du produit
+Route::get('/product/details/{id}', [GuestController::class, 'productDetails']);
+
+//page des produits de chaque catégorie avec {category} est l'id du catégorie
+Route::get('/product/{category}/list', [GuestController::class, 'shop']);
 
 Auth::routes();
 
@@ -73,6 +76,3 @@ Route::post('/admin/products/update', [ProductController::class, 'update'])->mid
 
 //Supprimer une catégorie
 Route::get('/admin/products/{id}/delete', [ProductController::class, 'destroy'])->middleware('auth', 'admin');
-
-
-

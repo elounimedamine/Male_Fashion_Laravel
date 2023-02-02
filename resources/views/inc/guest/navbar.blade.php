@@ -10,7 +10,7 @@
                     
                     <!--Afficher la liste des catégories-->
                     @foreach ($categories as $c)
-                        <a href="" class="nav-item nav-link">{{ $c->name }}</a>
+                        <a href="/product/{{ $c->id }}/list" class="nav-item nav-link">{{ $c->name }}</a>
                     @endforeach
                     
 
