@@ -42,7 +42,9 @@ class GuestController extends Controller
         $category = Category::find($idcategory);
 
         //récupération de la liste des produits d'une catégorie sélectionnées (category_id de la base de données = $idcategory)
-        $products = Product::where('category_id', $idcategory)->get();
+        //$products = Product::where('category_id', $idcategory)->get();
+        //products méthode dans le model Product(en le fait à travers les relations entre les 2 modèles Category et Product)
+        $products = $category->products;
 
         //pour voir le liste des produits affichées pour chaque catégories
         //dd($products);
@@ -50,7 +52,7 @@ class GuestController extends Controller
         //récupération de la liste des catégories
         $categories = Category::all();
 
-        return view('guest.shop')->with('categories', $categories);
+        return view('guest.shop')->with('categories', $categories)->with('products', $products);
     }
 
 }
