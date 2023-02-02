@@ -35,10 +35,14 @@
                 <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
             </a>
         </div>
+
         <div class="col-lg-6 col-6 text-left">
-            <form action="">
+            
+            <form action="/products/search" method="POST">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for products">
+
+                    @csrf
+                    <input type="text" class="form-control" placeholder="Search for products" name="keywords" >
                     <div class="input-group-append">
                         <span class="input-group-text bg-transparent text-primary">
                             <i class="fa fa-search"></i>
@@ -46,7 +50,9 @@
                     </div>
                 </div>
             </form>
+
         </div>
+
         <div class="col-lg-3 col-6 text-right">
             <a href="" class="btn border">
                 <i class="fas fa-heart text-primary"></i>

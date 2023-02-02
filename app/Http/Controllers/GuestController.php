@@ -36,6 +36,7 @@ class GuestController extends Controller
         return view('guest.product-details')->with('categories', $categories)->with('product', $product)->with('products', $products);
     }
 
+    //fonction pour afficher les produits d'une catégorie
     public function shop($idcategory){
 
         //récupération de l'id de catégorie sélectionnée
@@ -54,5 +55,23 @@ class GuestController extends Controller
 
         return view('guest.shop')->with('categories', $categories)->with('products', $products);
     }
+
+    //fonction pour chercher un produit au hasard
+    public function search(Request $request){
+
+        //dd($request);
+        //dd($request->keywords);
+
+        //pour retourner le produit cherchée selon les mots tapées qq soit nom complet ou qq lettres
+        //keywords est le nom du champ search dans le topbar du site
+        //name est un champ de la bd
+        $products = Product::where('name', 'LIKE', '%' . $request->keywords . '%')->get();
+
+        //récupération de la liste des catégories
+        $categories = Category::all();
+
+        return view('guest.shop')->with('categories', $categories)->with('products', $products);
+    }
+    
 
 }

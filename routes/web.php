@@ -39,6 +39,9 @@ Route::get('/product/details/{id}', [GuestController::class, 'productDetails']);
 //page des produits de chaque catégorie avec {category} est l'id du catégorie
 Route::get('/product/{category}/list', [GuestController::class, 'shop']);
 
+//Route pour chercher un produit avec post
+Route::post('/products/search', [GuestController::class, 'search']);
+
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
