@@ -11,6 +11,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CommandeController;
+
 
 
 
@@ -57,6 +59,9 @@ Route::post('/client/profile/update', [ClientController::class, 'updateprofile']
 
 //pour ajouter un review à travers le client connectée
 Route::post('/client/review/store', [ClientController::class, 'addReview'])->middleware('auth');
+
+//pour ajouter un produit dans le panier à travers le client
+Route::post('/client/order/store', [CommandeController::class, 'store'])->middleware('auth');
 
 
 //Route pour les catégories

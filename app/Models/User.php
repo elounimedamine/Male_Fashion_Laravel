@@ -50,6 +50,11 @@ class User extends Authenticatable
         return $this->hasMany(Review::class, 'user_id', 'id');
     }
 
+    //Table Mère
+    //Relation entre User et Commande (1 ... n)
+    public function commandes(){
+        return $this->hasMany(Commande::class, 'client_id', 'id');
+    }
 
 
 }
