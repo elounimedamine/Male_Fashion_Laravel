@@ -55,6 +55,10 @@ Route::get('/client/profile', [ClientController::class, 'profile'])->middleware(
 //pour mettre à jour le profile de l'admin avec la méthode post
 Route::post('/client/profile/update', [ClientController::class, 'updateprofile'])->middleware('auth');
 
+//pour ajouter un review à travers le client connectée
+Route::post('/client/review/store', [ClientController::class, 'addReview'])->middleware('auth');
+
+
 //Route pour les catégories
 
 //Dashboard Admin

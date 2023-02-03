@@ -128,7 +128,10 @@
                 <div class="nav nav-tabs justify-content-center border-secondary mb-4">
                     <a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">Description</a>
                     <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-2">Information</a>
-                    <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-3">Reviews (0)</a>
+
+                    <!--$product->reviews est par la relation entre le produit et le review, reviews methode dans la classe Product-->
+                    <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-3">Reviews ({{ count($product->reviews) }})</a>
+
                 </div>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-pane-1">
@@ -174,56 +177,68 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="tab-pane fade" id="tab-pane-3">
                         <div class="row">
+
                             <div class="col-md-6">
-                                <h4 class="mb-4">1 review for "Colorful Stylish Shirt"</h4>
-                                <div class="media mb-4">
-                                    <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
-                                    <div class="media-body">
-                                        <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
-                                        <div class="text-primary mb-2">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star-half-alt"></i>
-                                            <i class="far fa-star"></i>
+
+                            <!--$product->reviews est par la relation entre le produit et le review, reviews methode dans la classe Product-->
+                                <h4 class="mb-4">{{ count($product->reviews) }} review for "{{ $product->name }}"</h4>
+
+                                @foreach ($product->reviews as $review)
+                                    <div class="media mb-4">
+                                        <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+
+                                        <div class="media-body">
+
+                                         <!--$review->user->name est par la relation entre le review et le user, name est un attribut de user, user est une methode dans la classe Review, created_at est un champ de la table reviews dans la bd-->
+                                            <h6>{{ $review->user->name }}<small> - <i>{{ $review->created_at }}</i></small></h6>
+
+                                            <div class="text-primary mb-2">
+
+                                                <!--pour afficher le nombre d'etoile dans le rate, rate est un champs de la bd-->
+                                                @for ($i = 0;  $i < $review->rate; $i++)
+                                                    <i class="fas fa-star"></i>
+                                                @endfor
+                                                
+                                            </div>
+
+                                            <!--content de review-->
+                                            <p>{{ $review->content }}</p>
+
                                         </div>
-                                        <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
+
                                     </div>
-                                </div>
+                                @endforeach
+
                             </div>
+
                             <div class="col-md-6">
                                 <h4 class="mb-4">Leave a review</h4>
-                                <small>Your email address will not be published. Required fields are marked *</small>
-                                <div class="d-flex my-3">
+                                
+                                <!--formulaire d'ajout d'un review-->
+                                <form action="/client/review/store" method="POST">
+                                    @csrf
+
+                                    <!--champ cachée pour product_id qui est ajoutée dans le formulaire-->
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+
                                     <p class="mb-0 mr-2">Your Rating * :</p>
-                                    <div class="text-primary">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                    </div>
-                                </div>
-                                <form>
+                                    <input type="number" name="rate" max="5" min="1" class="form-control mb-2"/>
+                                    
                                     <div class="form-group">
                                         <label for="message">Your Review *</label>
-                                        <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
+                                        <input type="text" name="content" placeholder="Your Review" class="form-control mb-2"/>
                                     </div>
+                                    
                                     <div class="form-group">
-                                        <label for="name">Your Name *</label>
-                                        <input type="text" class="form-control" id="name">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email">Your Email *</label>
-                                        <input type="email" class="form-control" id="email">
-                                    </div>
-                                    <div class="form-group mb-0">
                                         <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
                                     </div>
                                 </form>
+
                             </div>
+
                         </div>
                     </div>
                 </div>

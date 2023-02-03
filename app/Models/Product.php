@@ -15,5 +15,12 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
+    //Table Mère
+    //Relation entre Produit et Review (1 ... n)
+    public function reviews(){
+        return $this->hasMany(Review::class, 'product_id', 'id');
+    }
+
+
 
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -38,4 +39,28 @@ class ClientController extends Controller
         return redirect('/client/profile')->with('success', 'Client est modifiée avec succèss');
         
     }
+
+    //fonction qui permet d'ajouter un review
+    public function addReview(Request $request){
+        //dd($request);
+
+
+        //création d'une instance de la classe review
+         $review = new Review();
+
+         //ajout d'un review
+        $review->rate = $request->rate;
+        $review->product_id = $request->product_id; // clé étrangère, product_id est un champ caché dans le html
+        $review->content = $request->content;
+        $review->user_id = Auth::user()->id; //current user connectée à travers son id, clé étrangère
+
+        //enregistrer les données
+        $review->save();
+
+        //redirection vers dernière 1ere page 
+        return redirect()->back();
+
+    }
+
+
 }

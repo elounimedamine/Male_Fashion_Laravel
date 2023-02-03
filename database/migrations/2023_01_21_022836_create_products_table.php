@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('qte');
             $table->string('photo');
             
-            //clé étrangère
+            //clé étrangère de catégorie
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             
