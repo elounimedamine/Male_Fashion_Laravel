@@ -66,6 +66,10 @@ Route::post('/client/order/store', [CommandeController::class, 'store'])->middle
 //pour gérer la cart des produits commandées par le client 
 Route::get('/client/cart', [ClientController::class, 'cart'])->middleware('auth');
 
+//pour supprimer une ligne de commande 
+Route::get('/client/lc/{idlc}/destroy', [CommandeController::class, 'lignecommandeDestroy'])->middleware('auth');
+
+
 
 //Route pour les catégories
 

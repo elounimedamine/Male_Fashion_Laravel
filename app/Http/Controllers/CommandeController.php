@@ -23,13 +23,32 @@ class CommandeController extends Controller
         //partie création de commande
         //s'il y a un produit commandée en 1ere lieu(commande en cours existe), on va créer une nouvelle ligne de commande
         if($commande){
-            //création de la ligne de commande
-            $lc = new LigneCommande();
-            $lc->qte = $request->qte;
-            $lc->product_id = $request->idproduct; //id du champ cachetée
-            $lc->commande_id = $commande->id; //id du commande crée en haut
-            $lc->save();
-            //echo "produit commandée";
+
+            //check if produit existe
+            //supposons que le produit n'existe pas dans la ligne de commande
+            $existe = false;
+            
+            foreach ($commande->lignecommandes as $lingec){
+
+                if($lingec->product_id == $request->idproduct){
+                    $existe = true;
+
+                    $lingec->qte += $request->qte;
+
+                    $lingec->update();
+                }
+            }
+
+            //if existe = false, on va créer une nouvelle ligne de commande
+            if(!$existe){
+                //création de la ligne de commande
+                $lc = new LigneCommande();
+                $lc->qte = $request->qte;
+                $lc->product_id = $request->idproduct; //id du champ cachetée
+                $lc->commande_id = $commande->id; //id du commande crée en haut
+                $lc->save();
+                echo "produit commandée";
+            }
 
             //redirection vers le panier
             return redirect('/client/cart')->with('success', 'Produit commandée');
@@ -54,6 +73,7 @@ class CommandeController extends Controller
                 return redirect('/client/cart')->with('success', 'Produit commandée');
 
             }else{
+                //pour redirect()->back() retourner au meme page
                 return redirect()->back()->with('error', 'Impossible de commander le produit');
             }
 
@@ -61,5 +81,14 @@ class CommandeController extends Controller
 
     }
 
+    //fonction qui permet de supprimer une ligne de commande
+    public function lignecommandeDestroy($idlc){
+
+        $lc = LigneCommande::find($idlc);
+        $lc->delete();
+
+        //pour redirect()->back() retourner au meme page
+        return redirect()->back()->with('success', 'Ligne de commande supprimée avec succèss');
+    }
 
 }

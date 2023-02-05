@@ -56,7 +56,7 @@
     <div class="container-fluid pt-5">
         <div class="row px-xl-5">
             <div class="col-lg-8 table-responsive mb-5">
-                
+
                 <table class="table table-bordered text-center mb-0">
                     <thead class="bg-secondary text-dark">
                         <tr>
@@ -85,7 +85,8 @@
                                 </td>
                                 <!-- total = prix*qte -->
                                 <td class="align-middle">{{ $lc->product->price * $lc->qte }} TND</td>
-                                <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
+                                <!--ide de la ligne de commande-->
+                                <td class="align-middle"><a href="/client/lc/{{ $lc->id }}/destroy" class="btn btn-sm btn-primary"><i class="fa fa-times"></i></a></td>
                             </tr>
                         @endforeach
                             
