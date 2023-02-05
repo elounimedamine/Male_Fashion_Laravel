@@ -63,6 +63,9 @@ Route::post('/client/review/store', [ClientController::class, 'addReview'])->mid
 //pour ajouter un produit dans le panier à travers le client
 Route::post('/client/order/store', [CommandeController::class, 'store'])->middleware('auth');
 
+//pour gérer la cart des produits commandées par le client 
+Route::get('/client/cart', [ClientController::class, 'cart'])->middleware('auth');
+
 
 //Route pour les catégories
 

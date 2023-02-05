@@ -16,12 +16,11 @@ class LigneCommande extends Model
         return $this->belongsTo(Commande::class, 'commande_id', 'id');
     }
 
-    //Table Mère
+    //Table Fille
     //Relation entre LigneCommande et Produit (1 ... 1)
-    //une ligne de commande contient seulement un produit
     public function product()
     {
-        return $this->hasOne(Product::class, 'product_id', 'id');
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 
 }

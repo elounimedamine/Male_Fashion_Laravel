@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Commande;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -60,6 +62,17 @@ class ClientController extends Controller
         //redirection vers dernière 1ere page 
         return redirect()->back();
 
+    }
+
+    //fonction qui permet de gérer la carte
+    public function cart(){
+        //récupération de la liste des categories
+        $categories = Category::all();
+
+        //vérifier si une commande est en cours pour ce client connectée et les récupérer
+        $commande = Commande::where('client_id', Auth::user()->id)->where('etat', 'en cours')->first();
+
+        return view('guest.cart')->with('categories', $categories)->with('commande', $commande);
     }
 
 

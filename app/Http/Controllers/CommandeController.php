@@ -20,6 +20,7 @@ class CommandeController extends Controller
 
         //dd($commande);
 
+        //partie création de commande
         //s'il y a un produit commandée en 1ere lieu(commande en cours existe), on va créer une nouvelle ligne de commande
         if($commande){
             //création de la ligne de commande
@@ -28,9 +29,10 @@ class CommandeController extends Controller
             $lc->product_id = $request->idproduct; //id du champ cachetée
             $lc->commande_id = $commande->id; //id du commande crée en haut
             $lc->save();
-            echo "produit commandée";
+            //echo "produit commandée";
 
             //redirection vers le panier
+            return redirect('/client/cart')->with('success', 'Produit commandée');
 
         }else{
             //s'il n'y a pas de produit commandée en 1ere lieu(commande en cours n'existe pas), on va créer une nouvelle commande 
@@ -46,9 +48,10 @@ class CommandeController extends Controller
                 $lc->product_id = $request->idproduct; //du champ cachetée
                 $lc->commande_id = $commande->id; //id du commande crée en haut
                 $lc->save();
-                echo "produit commandée";
+                //echo "produit commandée";
 
                 //redirection vers le panier
+                return redirect('/client/cart')->with('success', 'Produit commandée');
 
             }else{
                 return redirect()->back()->with('error', 'Impossible de commander le produit');

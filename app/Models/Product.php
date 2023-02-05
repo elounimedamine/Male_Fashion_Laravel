@@ -21,10 +21,11 @@ class Product extends Model
         return $this->hasMany(Review::class, 'product_id', 'id');
     }
 
-    //Table Fille
-    //Relation entre Produit et LigneCommande (1 ... 1)
+    //Table Mère
+    //Relation entre Produit et LigneCommande (1 ... n)
+    //chaque produit contient n ligne de commandes
     public function LigneCommande(){
-        return $this->belongsTo(LigneCommande::class, 'product_id', 'id');
+        return $this->hasMany(LigneCommande::class, 'product_id', 'id');
     }
 
 }
