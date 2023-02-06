@@ -93,8 +93,14 @@ class ClientController extends Controller
 
     }
 
+    //fonctions pour afficher la page de la liste des commandes de client
     public function mescommandes(){
         return view('client.commandes');
+    }
+
+    //fonctions pour afficher la page de bloquage de client
+    public function AfficheMessageBloquee(){
+        return view('client.bloquer');
     }
 
 
