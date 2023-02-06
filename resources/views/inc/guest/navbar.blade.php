@@ -6,6 +6,7 @@
                 <i class="fa fa-angle-down text-dark"></i>
             </a>
             <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical">
+
                 <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
                     
                     <!--Afficher la liste des catégories-->
@@ -13,8 +14,8 @@
                         <a href="/product/{{ $c->id }}/list" class="nav-item nav-link">{{ $c->name }}</a>
                     @endforeach
                     
-
                 </div>
+                
             </nav>
         </div>
         <div class="col-lg-9">
@@ -26,23 +27,13 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div class="navbar-nav mr-auto py-0">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="shop.html" class="nav-item nav-link">Shop</a>
-                        <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="cart.html" class="dropdown-item">Shopping Cart</a>
-                                <a href="checkout.html" class="dropdown-item">Checkout</a>
-                            </div>
-                        </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
-                    </div>
+
+                <!--les liens de navigation entre les pages de login est sign up-->
                     <div class="navbar-nav ml-auto py-0">
-                        <a href="" class="nav-item nav-link">Login</a>
-                        <a href="" class="nav-item nav-link">Register</a>
+                        <a href="/login" class="nav-item nav-link">Login</a>
+                        <a href="/register" class="nav-item nav-link">Register</a>
                     </div>
+
                 </div>
             </nav>
             <div id="header-carousel" class="carousel slide" data-ride="carousel">

@@ -93,5 +93,9 @@ class ClientController extends Controller
 
     }
 
+    public function mescommandes(){
+        return view('client.commandes');
+    }
+
 
 }

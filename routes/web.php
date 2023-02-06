@@ -72,6 +72,8 @@ Route::get('/client/lc/{idlc}/destroy', [CommandeController::class, 'lignecomman
 //pour faire le checkout d'une commande de client
 Route::post('/client/checkout', [ClientController::class, 'checkout'])->middleware('auth');
 
+//pour afficher la liste des commandes de client dans un tableau
+Route::get('/client/commandes', [ClientController::class, 'mescommandes'])->middleware('auth');
 
 
 //Route pour les catégories
