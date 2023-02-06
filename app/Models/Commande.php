@@ -23,5 +23,18 @@ class Commande extends Model
         return $this->hasMany(LigneCommande::class, 'commande_id', 'id');
     }
 
+    //fonction qui permet de retourner le total de la carte de commande de client
+    public function getTotal(){
+        //supposons que le totale = 0;
+        $total = 0;
+
+        //lignecommandes est de la reltion
+        foreach($this->lignecommandes as $lc){
+            $total += $lc->product->price * $lc->qte;
+        }
+
+        return $total;
+    }
+
 
 }

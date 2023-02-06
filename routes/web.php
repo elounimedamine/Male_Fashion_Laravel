@@ -69,6 +69,9 @@ Route::get('/client/cart', [ClientController::class, 'cart'])->middleware('auth'
 //pour supprimer une ligne de commande 
 Route::get('/client/lc/{idlc}/destroy', [CommandeController::class, 'lignecommandeDestroy'])->middleware('auth');
 
+//pour faire le checkout d'une commande de client
+Route::post('/client/checkout', [ClientController::class, 'checkout'])->middleware('auth');
+
 
 
 //Route pour les catégories

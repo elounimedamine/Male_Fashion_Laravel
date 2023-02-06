@@ -75,5 +75,23 @@ class ClientController extends Controller
         return view('guest.cart')->with('categories', $categories)->with('commande', $commande);
     }
 
+    //fonction qui permet de faire le checkout d'une commande
+    public function checkout(Request $request){
+        //dd($request);
+
+        //avec l'id de commande nommée commande dans une input hidden du formulaire
+        $commande = Commande::find($request->commande); //commande est le nom de champ hidden dans le formulaire pour avoir l'id du commande
+        //dd($commande, $commande->getTotal());
+
+        //changement d'etat de commande de en cours vers payée
+        $commande->etat = "payée";
+
+        //mise à jour
+        $commande->update();
+
+        return redirect('/client/dashboard')->with('success', 'Commande payée avec succèss');
+
+    }
+
 
 }
