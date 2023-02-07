@@ -198,5 +198,36 @@ class ProductController extends Controller
         }
     }
 
+    //fonction qui permet de rechercher un produit du formulaire($request)
+    public function searchProduct(Request $request){
+        //dd($request);
+
+       //$products = Product::where('name', 'LIKE', '%'. $request->product_name .'%')->get();
+
+       //4 cas
+       if($request->product_name && !$request->qte){
+            $products = Product::where('name', 'LIKE', '%'. $request->product_name .'%')->get();
+       }
+
+       if(!$request->product_name && $request->qte){
+            $products = Product::where('qte', '>=', $request->qte)->get();
+       }
+
+       if($request->product_name && $request->qte){
+            $products = Product::where('name', 'LIKE', '%'. $request->product_name .'%')->where('qte', '>=', $request->qte)->get();
+       }
+
+       if(!$request->product_name && !$request->qte){
+
+            //retourner la liste de tous les produits
+            $products = Product::all();
+       }
+
+       //récupération de la liste des catégories
+       $categories = Category::all();
+
+       return view('admin.produits.index')->with('products', $products)->with('categories', $categories);
+    }
+
 
 }

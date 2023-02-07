@@ -128,3 +128,6 @@ Route::get('/admin/user/{id}/activer', [AdminController::class, 'ActiveUser'])->
 //Route pour afficher les commandes de clients dans l'espace admin
 Route::get('/admin/commandes', [AdminController::class, 'commandes'])->middleware('auth', 'admin');
 
+//Route pour chercher les commandes selon leur caractéristiques(nom, qte)
+Route::post('/admin/product/search', [ProductController::class, 'searchProduct'])->middleware('auth', 'admin');
+

@@ -40,6 +40,28 @@
                             <!--Pour Appeler le Modal d'Ajout, data-bs-toggle="modal" data-bs-target="#exampleModal" au lieu du href-->
                             <a data-bs-toggle="modal" data-bs-target="#exampleModal"
                                 class="btn btn-primary mt-3">Ajouter Un Produit</a>
+
+                                <!--formulaire contient une zone de recherche de produit-->
+                                    <form class="mt-2" action="/admin/product/search" method="post">
+
+                                        <div class="row">
+                                            <!--token-->
+                                            @csrf 
+
+                                            <!--12 colonnes tjrs dans le bootstrap-->
+                                            <div class="col-5">
+                                                <input type="text" name="product_name" class="form-control" placeholder="Tapper le nom du produit">
+                                            </div>
+                                            <div class="col-5">
+                                                <input type="number" name="qte" class="form-control" placeholder="Tapper la quantité du produit" min="0">
+                                            </div>
+                                            <div class="col-2">
+                                                <button type="submit" class="btn btn-success">Chercher</button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                
                         </div>
 
                         <div class="mt-3">
