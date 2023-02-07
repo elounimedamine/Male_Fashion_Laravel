@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Commande Client Espace Client</title>
+    <title>Commande Client Espace Admin</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
@@ -21,17 +21,17 @@
         <div class="container-fluid px-0">
 
           <!--include SideBar HTML Code-->
-          @include('inc.client.sidebar')
+          @include('inc.admin.sidebar')
 
           <!--include NavBar HTML Code-->
-          @include('inc.client.nav')
+          @include('inc.admin.nav')
 
           <div class="content">
             <div class="pb-5">
               <div class="row g-5">
               <div>
 
-                <h3>Commandes</h3>
+                <h3>Commandes Clients</h3>
                 <hr/>
 
                 <!--tableau qui contient la liste des commandes de client-->
@@ -44,15 +44,15 @@
                             <th scope="col">Commande N°</th>
                             <th scope="col">Etat</th>
                             <th scope="col">Total</th>
+                            <th scope="col">Client</th>
                             <th scope="col">Date</th>
                           </tr>
                         </thead>
 
                         <tbody>
 
-                            <!--pour parcourir la liste des commandes de l'utilisateur connectée maintenant-->
-                            <!--commandes méthode dans le model user pour la relation avec le model Commande-->
-                            @foreach (auth()->user()->commandes as $index => $commande)
+                            <!--pour afficher les commandes de client-->
+                            @foreach ($commandes as $index => $commande)
                                 <tr>
                                     <th scope="row">{{ $index + 1 }}</th>
 
@@ -65,6 +65,8 @@
                                     </td>
 
                                     <td>{{ $commande->getTotal() }} TND</td>
+                                    <!--client est une méthode de relation entre le client et commande dans le model commande-->
+                                    <td>{{ $commande->client->name }}</td>
                                     <td>{{ $commande->created_at }}</td>
                                 </tr>
                             @endforeach
@@ -80,7 +82,7 @@
             </div>
 
             <!--include Footer HTML Code-->
-            @include('inc.client.footer')
+            @include('inc.admin.footer')
 
             
           </div>

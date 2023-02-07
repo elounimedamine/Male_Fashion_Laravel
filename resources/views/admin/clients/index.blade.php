@@ -56,7 +56,7 @@
                                     <tbody>
 
                                         <!--Afficher la liste des clients dont le role est user-->
-                                        @foreach ($clients as $index => $client )
+                                        @foreach ($clients as $index => $client)
                                             <tr>
                                                 <th scope="row">{{ $index + 1 }}</th>
                                                 <td>{{ $client->name }}</td>
@@ -64,8 +64,10 @@
                                                 <td>
                                                     <!--si le client est active qui est par defaut true=1, on va bloquer le user, sinon on va le débloquer par l'affichage d'un badge de message-->
                                                     @if ($client->is_active)
-                                                        <span class="badge bg-primary">Active User</span>
+                                                        <span data-feather="check"></span>
+                                                        <span class="badge bg-success">Active User</span>
                                                     @else
+                                                        <span data-feather="x-octagon"></span>
                                                         <span class="badge bg-danger">Inactif User</span>
                                                     @endif
                                                     
@@ -75,7 +77,7 @@
                                                     @if ($client->is_active)
                                                         <a class="btn btn-danger" href="/admin/user/{{ $client->id }}/bloquer">Bloquer</a>
                                                     @else
-                                                        <a class="btn btn-primary" href="/admin/user/{{ $client->id }}/activer">Activer</a>
+                                                        <a class="btn btn-success" href="/admin/user/{{ $client->id }}/activer">Activer</a>
                                                     @endif
                                                 </td>
                                             </tr>

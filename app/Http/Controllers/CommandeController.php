@@ -85,6 +85,7 @@ class CommandeController extends Controller
     public function lignecommandeDestroy($idlc){
 
         $lc = LigneCommande::find($idlc);
+        
         $lc->delete();
 
         //pour redirect()->back() retourner au meme page

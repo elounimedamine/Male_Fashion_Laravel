@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Auth\User;
+use App\Models\Commande;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -81,6 +82,13 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Client est activée avec succèss');
     }
 
+    //fonction qui permet d'afficher la liste des commandes de client dans l'espace admin
+    public function commandes(){
+        //récupération de la liste des commandes
+        $commandes = Commande::all();
+
+        return view('admin.commandes.index')->with('commandes', $commandes);
+    }
 
 
 }

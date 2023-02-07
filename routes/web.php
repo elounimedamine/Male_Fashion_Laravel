@@ -124,3 +124,7 @@ Route::get('/admin/user/{id}/bloquer', [AdminController::class, 'BloqueUser'])->
 
 //Route pour débloquer(activer) les clients par l'admin
 Route::get('/admin/user/{id}/activer', [AdminController::class, 'ActiveUser'])->middleware('auth', 'admin');
+
+//Route pour afficher les commandes de clients dans l'espace admin
+Route::get('/admin/commandes', [AdminController::class, 'commandes'])->middleware('auth', 'admin');
+
